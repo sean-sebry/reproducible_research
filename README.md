@@ -1,0 +1,139 @@
+---
+title: "Reproducible Research: Assignment One"
+author: "Sean Sebry"
+date: "2020-01-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, results = 'hide', eval = TRUE)
+
+```
+
+## **The Quantified Self Data**
+
+### Vignette initialization:
+
+    Assignment conditions 1, 9
+
+```{r load packages, results = 'hide', message = FALSE}
+
+#If not installed:
+#install.packages("tidyverse")
+#install.packages("data.table")
+
+library(tidyverse)
+library(data.table)
+library(lubridate)
+
+```
+
+### Exploratory data analysis:
+
+    Assignment conditions 1, 2, 9
+
+```{r eda, results = 'markup'}
+
+data_raw <- fread("activity.csv")
+head(data_raw)
+str(data_raw)
+
+#Sample histogram of total steps taken each day (with out removing missing data)
+
+```
+
+- steps: Number of steps taking in a 5-minute interval (missing values are coded as \color{red}{\verb|NA|}NA)
+- date: The date on which the measurement was taken in YYYY-MM-DD format
+- interval: Identifier for the 5-minute interval in which measurement was taken
+
+*source: assignment document*
+
+### Tidying
+
+    Assignment conditions 6, 9
+
+```{r data tidying, results='markup'}
+
+# Note, for the assignment, my strategy and method to analyze this data, is to only use complete observations, as seen in this code: (this code is meant to satisfy assignment condition 6.)
+data_tidy <- data_raw %>% 
+  mutate(date = as_date(date)) %>% 
+  filter(complete.cases(.)) %>% 
+  glimpse()
+
+```
+
+### Analysis
+
+1. Steps taken each day
+
+    Assignment conditions 7, 9
+
+```{r data analytics 1, results='markup'}
+
+total_steps_by_day <- data_tidy %>% 
+  group_by(date) %>% 
+  summarize(steps_per_day = sum(steps)) %>% 
+  print()
+
+total_steps_by_day_plot <- ggplot(total_steps_by_day, aes(x = steps_per_day))
+total_steps_by_day_plot +
+  geom_histogram(bins = nrow(total_steps_by_day)) + 
+  labs(title = "Histogram of Steps per Day")
+
+```
+
+2. Statistics of steps per day
+
+    Assignment conditions 3, 4, 9
+
+```{r data analytics 2, results='markup'}
+
+stats_for_steps_by_day <- data_tidy %>% 
+  filter(steps > 0) %>% 
+  group_by(date) %>% 
+  summarize(avg_steps_per_day = mean(steps), median_steps_per_day = as.integer(median(steps))) %>% 
+  print()
+
+long_form_stats_for_steps_by_day <- reshape2::melt(stats_for_steps_by_day, id = "date")
+
+ggplot(data=long_form_stats_for_steps_by_day,
+       aes(x=date, y=value, colour=variable)) +
+       geom_line() +
+       labs(title = "Median and mean (non-zero) steps per day")
+
+```
+
+3. The 5 minute interval that on average 
+
+    Assignment conditions 5, 9
+
+```{r data analytics 3, results='markup'}
+
+glimpse(stats_for_steps_by_day)
+filter(stats_for_steps_by_day, avg_steps_per_day == max(avg_steps_per_day))
+
+```
+
+4. Panel plot comparing week days and weekend days
+
+    Assignment conditions 8, 9
+
+```{r data analytics 4, results='markup'}
+
+stats_for_steps_by_days_of_week <- data_tidy %>% 
+  filter(steps > 0) %>% 
+  group_by(date) %>% 
+  summarize(avg_steps_per_day = mean(steps)) %>% 
+  group_by(day_of_wk = as.factor(weekdays(date))) %>% 
+  print()
+
+wk_day_plot <- ggplot(data=stats_for_steps_by_days_of_week,
+       aes(x=date, y=avg_steps_per_day, color = day_of_wk)) 
+
+wk_day_plot +
+  geom_line() +
+  facet_wrap(vars(day_of_wk)) +
+  labs(title = "Average steps by weekday")
+  
+```
