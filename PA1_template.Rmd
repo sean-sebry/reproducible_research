@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hide', eval = TRUE)
 
 ## **The Quantified Self Data**
 
-### Vignette initialization:
+### Vignette initialization
 
     Assignment conditions 1, 9
 
@@ -32,7 +32,7 @@ library(lubridate)
 
 ```
 
-### Exploratory data analysis:
+### Exploratory data analysis
 
     Assignment conditions 1, 2, 9
 
@@ -86,7 +86,7 @@ total_steps_by_day_plot +
 
 ```
 
-2. Statistics of steps per day
+2. Statistics of steps per day  
 
     Assignment conditions 3, 4, 9
 

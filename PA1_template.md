@@ -12,7 +12,7 @@ output:
 
 ## **The Quantified Self Data**
 
-### Vignette initialization:
+### Vignette initialization
 
     Assignment conditions 1, 9
 
@@ -27,7 +27,7 @@ library(data.table)
 library(lubridate)
 ```
 
-### Exploratory data analysis:
+### Exploratory data analysis
 
     Assignment conditions 1, 2, 9
 
@@ -130,7 +130,7 @@ total_steps_by_day_plot +
 
 ![](PA1_template_files/figure-html/data analytics 1-1.png)<!-- -->
 
-2. Statistics of steps per day
+2. Statistics of steps per day  
 
     Assignment conditions 3, 4, 9
 
