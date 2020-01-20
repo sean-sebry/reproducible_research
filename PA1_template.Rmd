@@ -137,5 +137,3 @@ wk_day_plot +
   labs(title = "Average steps by weekday")
   
 ```
-
-
