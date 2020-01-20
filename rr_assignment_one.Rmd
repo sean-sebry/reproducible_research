@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hide', eval = TRUE)
 
 ### Vignette initialization:
 
-Assignment conditions 1, 9
+    Assignment conditions 1, 9
 
 ```{r load packages, results = 'hide', message = FALSE}
 
@@ -31,7 +31,7 @@ library(lubridate)
 
 ### Exploratory data analysis:
 
-Assignment conditions 1, 2, 9
+    Assignment conditions 1, 2, 9
 
 ```{r eda, results = 'markup'}
 
@@ -51,7 +51,7 @@ str(data_raw)
 
 ### Tidying
 
-Assignment conditions 6, 9
+    Assignment conditions 6, 9
 
 ```{r data tidying, results='markup'}
 
@@ -67,7 +67,7 @@ data_tidy <- data_raw %>%
 
 1. Steps taken each day
 
-Assignment conditions 7, 9
+    Assignment conditions 7, 9
 
 ```{r data analytics 1, results='markup'}
 
@@ -85,7 +85,7 @@ total_steps_by_day_plot +
 
 2. Statistics of steps per day
 
-Assignment conditions 3, 4, 9
+    Assignment conditions 3, 4, 9
 
 ```{r data analytics 2, results='markup'}
 
@@ -106,15 +106,36 @@ ggplot(data=long_form_stats_for_steps_by_day,
 
 3. The 5 minute interval that on average 
 
-Assignment conditions 5, 8, 9
+    Assignment conditions 5, 9
 
 ```{r data analytics 3, results='markup'}
 
-
+glimpse(stats_for_steps_by_day)
+filter(stats_for_steps_by_day, avg_steps_per_day == max(avg_steps_per_day))
 
 ```
 
+4. Panel plot comparing week days and weekend days
 
+    Assignment conditions 8, 9
 
+```{r data analytics 4, results='markup'}
+
+stats_for_steps_by_days_of_week <- data_tidy %>% 
+  filter(steps > 0) %>% 
+  group_by(date) %>% 
+  summarize(avg_steps_per_day = mean(steps)) %>% 
+  group_by(day_of_wk = as.factor(weekdays(date))) %>% 
+  print()
+
+wk_day_plot <- ggplot(data=stats_for_steps_by_days_of_week,
+       aes(x=date, y=avg_steps_per_day, color = day_of_wk)) 
+
+wk_day_plot +
+  geom_line() +
+  facet_wrap(vars(day_of_wk)) +
+  labs(title = "Average steps by weekday")
+  
+```
 
 
