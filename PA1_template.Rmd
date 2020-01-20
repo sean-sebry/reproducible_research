@@ -2,7 +2,10 @@
 title: "Reproducible Research: Assignment One"
 author: "Sean Sebry"
 date: "2020-01-16"
-output: html_document
+output: 
+  html_document: 
+    fig_caption: yes
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
