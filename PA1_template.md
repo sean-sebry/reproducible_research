@@ -128,7 +128,7 @@ total_steps_by_day_plot +
   labs(title = "Histogram of Steps per Day")
 ```
 
-![](PA1_template_files/figure-html/data analytics 1-1.png)<!-- -->
+![](PA1_template_files/figure-html/data_analytics_1-1.png)<!-- -->
 
 2. Statistics of steps per day  
 
@@ -169,7 +169,7 @@ ggplot(data=long_form_stats_for_steps_by_day,
        labs(title = "Median and mean (non-zero) steps per day")
 ```
 
-![](PA1_template_files/figure-html/data analytics 2-1.png)<!-- -->
+![](PA1_template_files/figure-html/data_analytics_2-1.png)<!-- -->
 
 3. The 5 minute interval that on average 
 
@@ -241,6 +241,6 @@ wk_day_plot +
   labs(title = "Average steps by weekday")
 ```
 
-![](PA1_template_files/figure-html/data analytics 4-1.png)<!-- -->
+![](PA1_template_files/figure-html/data_analytics_4-1.png)<!-- -->
 
 

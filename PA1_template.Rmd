@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hide', eval = TRUE)
 
     Assignment conditions 1, 9
 
-```{r load packages, results = 'hide', message = FALSE}
+```{r load_packages, results = 'hide', message = FALSE}
 
 #If not installed:
 #install.packages("tidyverse")
@@ -72,7 +72,7 @@ data_tidy <- data_raw %>%
 
     Assignment conditions 7, 9
 
-```{r data analytics 1, results='markup'}
+```{r data_analytics_1, results='markup'}
 
 total_steps_by_day <- data_tidy %>% 
   group_by(date) %>% 
@@ -90,7 +90,7 @@ total_steps_by_day_plot +
 
     Assignment conditions 3, 4, 9
 
-```{r data analytics 2, results='markup'}
+```{r data_analytics_2, results='markup'}
 
 stats_for_steps_by_day <- data_tidy %>% 
   filter(steps > 0) %>% 
@@ -111,7 +111,7 @@ ggplot(data=long_form_stats_for_steps_by_day,
 
     Assignment conditions 5, 9
 
-```{r data analytics 3, results='markup'}
+```{r data_analytics_3, results='markup'}
 
 glimpse(stats_for_steps_by_day)
 filter(stats_for_steps_by_day, avg_steps_per_day == max(avg_steps_per_day))
@@ -122,7 +122,7 @@ filter(stats_for_steps_by_day, avg_steps_per_day == max(avg_steps_per_day))
 
     Assignment conditions 8, 9
 
-```{r data analytics 4, results='markup'}
+```{r data_analytics_4, results='markup'}
 
 stats_for_steps_by_days_of_week <- data_tidy %>% 
   filter(steps > 0) %>% 
